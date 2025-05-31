@@ -1,21 +1,28 @@
+using FloodGuardian.Application.Service;
 using FloodGuardian.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração do DbContext
 builder.Services.AddDbContext<FloodGuardianContext>(options =>
     options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
 
-// Add services to the container.
-
+// Swagger
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsApiExplorer(); // só precisa uma vez
 builder.Services.AddSwaggerGen();
+
+// Serviços da aplicação
+builder.Services.AddScoped<UserService>(); // se tiver interface
+// builder.Services.AddScoped<UserService>(); // se estiver sem interface, ainda funciona
+
+// AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middlewares
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,9 +30,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
