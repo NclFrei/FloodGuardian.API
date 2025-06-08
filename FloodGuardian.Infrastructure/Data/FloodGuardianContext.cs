@@ -14,8 +14,16 @@ public class FloodGuardianContext : DbContext
     { }
 
     public DbSet<User> User { get; set; }
+    public DbSet<SensorData> Sensor { get; set; }
+    public DbSet<Alerta> Alertas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+    {  
+        modelBuilder.Entity<Alerta>()
+            .HasOne(a => a.SensorData)
+            .WithMany()
+            .HasForeignKey(a => a.SensorDataId)
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

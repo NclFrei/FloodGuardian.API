@@ -3,6 +3,7 @@ using System;
 using FloodGuardian.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace FloodGuardian.Infrastructure.Migrations
 {
     [DbContext(typeof(FloodGuardianContext))]
-    partial class FloodGuardianContextModelSnapshot : ModelSnapshot
+    [Migration("20250602084007_alteracaoTipoSensorId")]
+    partial class alteracaoTipoSensorId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

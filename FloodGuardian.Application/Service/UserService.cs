@@ -46,4 +46,40 @@ public class UserService
     {
         return await _context.User.CountAsync(u => u.Email == email) > 0;
     }
+
+    public async Task<UserResponse> UpdateUserAsync(Guid userId, UserRequest userRequest)
+    {
+        var user = await _context.User.FindAsync(userId);
+        if (user == null)
+            throw new KeyNotFoundException("Usuário não encontrado.");
+
+        if (!string.IsNullOrWhiteSpace(userRequest.Email))
+        {
+            if (await VerificaEmailExisteAsync(userRequest.Email) && userRequest.Email != user.Email)
+                throw new InvalidOperationException("Email já cadastrado.");
+
+            user.Email = userRequest.Email;
+        }
+
+        if (!string.IsNullOrWhiteSpace(userRequest.Nome))
+            user.Nome = userRequest.Nome;
+
+        if (!string.IsNullOrWhiteSpace(userRequest.Password))
+            user.SetPassword(userRequest.Password);
+
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<UserResponse>(user);
+    }
+
+    public async Task<bool> DeleteUserAsync(Guid userId)
+    {
+        var user = await _context.User.FindAsync(userId);
+        if (user == null)
+            return false;
+
+        _context.User.Remove(user);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

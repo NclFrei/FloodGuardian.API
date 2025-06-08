@@ -3,6 +3,7 @@ using System;
 using FloodGuardian.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace FloodGuardian.Infrastructure.Migrations
 {
     [DbContext(typeof(FloodGuardianContext))]
-    partial class FloodGuardianContextModelSnapshot : ModelSnapshot
+    [Migration("20250602083442_alteracaoAlertas")]
+    partial class alteracaoAlertas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +41,8 @@ namespace FloodGuardian.Infrastructure.Migrations
                     b.Property<Guid>("SensorDataId")
                         .HasColumnType("RAW(16)");
 
-                    b.Property<string>("SensorId")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                    b.Property<Guid>("SensorId")
+                        .HasColumnType("RAW(16)");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
@@ -71,9 +73,8 @@ namespace FloodGuardian.Infrastructure.Migrations
                     b.Property<double>("NivelAgua")
                         .HasColumnType("BINARY_DOUBLE");
 
-                    b.Property<string>("SensorId")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                    b.Property<Guid>("SensorId")
+                        .HasColumnType("RAW(16)");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("TIMESTAMP(7)");

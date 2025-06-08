@@ -18,6 +18,9 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 // Serviços da aplicação
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<AlertaService>();
+builder.Services.AddScoped<SensorDataService>();
+builder.Services.AddScoped<PredictionService>();
 
 // Configuração do JWT Authentication
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:SecretKey"]);

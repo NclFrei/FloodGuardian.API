@@ -49,4 +49,44 @@ public class UserController : ControllerBase
         return Ok(new { token });
     }
 
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchUser(Guid id, [FromBody] UserRequest userRequest)
+    {
+        try
+        {
+            var updatedUser = await _userService.UpdateUserAsync(id, userRequest);
+            return Ok(updatedUser);
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(Guid id)
+    {
+        try
+        {
+            await _userService.DeleteUserAsync(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
 }
