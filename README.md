@@ -1,4 +1,4 @@
-# Mottu Challenge - ChallengeFIAP
+# FloodGuardian - Global Solution Fiap
 
 Este projeto faz parte da disciplina **Advanced Business Development with .NET** e tem como objetivo criar uma API RESTful voltada para ajudar desenvolvedores a gerenciar dados e eventos de inundações, com endpoints para rastreamento de níveis de água, alertas e persistência de dados.
 
