@@ -63,9 +63,9 @@ MottuChallenge/
 
 ## ✅ Funcionalidades Implementadas
 
-- [x] CRUD completo para `User`, `Patio` e `Area`
+- [x] CRUD completo para `User`, `SensorId` e `Alertas`
 - [x] Autenticação com JWT
-- [x] Relacionamento entre Alerta → Endereco → Area → User
+- [x] Relacionamento entre Alerta → SensorData
 - [x] Validações com Data Annotations
 - [x] Documentação com Swagger
 - [x] Clean Architecture aplicada
